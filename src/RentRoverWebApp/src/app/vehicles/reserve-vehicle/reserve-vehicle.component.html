@@ -1,0 +1,15 @@
+<div class="reserve-container">
+  <h2>Reserve a Vehicle</h2>
+  <form (ngSubmit)="reserveVehicle()">
+    <label for="vehicleId">Vehicle ID:{{vehicleId}}</label>    
+
+    <label for="startDate">Start Date:</label>
+    <input id="startDate" type="date" [(ngModel)]="startDate" name="startDate" required>
+
+    <label for="endDate">End Date:</label>
+    <input id="endDate" type="date" [(ngModel)]="endDate" name="endDate" required>
+
+    <button type="submit">Reserve</button>
+    <button type="button" (click)="cancelReservation()" class="cancel-btn">Cancel</button>
+  </form>
+</div>

@@ -1,0 +1,20 @@
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  background: #1976d2;
+  padding: 1rem 0;
+  border-radius: 0 0 8px 8px;
+}
+.nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.nav-menu a.active,
+.nav-menu a:hover {
+  background: #1565c0;
+}

@@ -1,0 +1,10 @@
+<div class="vehicle-list">
+  <h2>Available vehicles</h2>
+  <ul>
+    <li *ngFor="let vehicle of vehicles ">
+      <strong>{{ vehicle.brand }} {{ vehicle.model }}</strong> ({{ vehicle.year }}) - ${{ vehicle.price }} 
+      <button class="reserve-btn" (click)="navigateToReserve(vehicle.id)">Reserve</button>
+    </li>
+  </ul>
+  <div *ngIf="vehicles">No vehicles available.</div>
+</div>
