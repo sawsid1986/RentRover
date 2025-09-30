@@ -4,7 +4,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Vehicle.Queries
+namespace Application.Vehicle.Queries.GetVehicles
 {
     public record GetVehiclesQuery : IRequest<IReadOnlyCollection<VehicleDto>>;
 

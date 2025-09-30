@@ -1,3 +1,4 @@
+using Api.Filters;
 using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddApplicationServices();
 builder.AddInfrastructureServices();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(
+    options => { 
+        options.Filters.Add<ApiExceptionFilterAttribute>();
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

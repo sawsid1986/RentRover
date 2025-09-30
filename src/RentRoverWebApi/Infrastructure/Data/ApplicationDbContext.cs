@@ -9,7 +9,9 @@ namespace Infrastructure.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<Vehicle> Vehicles => Set<Vehicle>();        
+        public DbSet<Vehicle> Vehicles => Set<Vehicle>();
+        public DbSet<LoginUser> LoginUsers => Set<LoginUser>();
+        public DbSet<VehicleReservation> VehicleReservations => Set<VehicleReservation>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

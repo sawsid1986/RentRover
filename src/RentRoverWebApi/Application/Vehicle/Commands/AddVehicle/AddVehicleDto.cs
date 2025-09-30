@@ -1,21 +1,20 @@
 ﻿using AutoMapper;
 
-namespace Application.Vehicle.Queries
+namespace Application.Vehicle.Commands.AddVehicle
 {
-    public class VehicleDto
+    public class AddVehicleDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        public int Year { get; set; }
-        public double Price { get; set; }
+        public int? Year { get; set; }
+        public double? Price { get; set; }
 
         private class Mapping : Profile
         {
             public Mapping()
             {
-                CreateMap<Domain.Entities.Vehicle, VehicleDto>();
+                CreateMap<AddVehicleDto, Domain.Entities.Vehicle>();
             }
         }
     }

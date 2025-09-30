@@ -9,6 +9,8 @@
     <label for="endDate">End Date:</label>
     <input id="endDate" type="date" [(ngModel)]="endDate" name="endDate" required>
 
+    <label (ng-if)="availableToReserve()"> Available </label>
+
     <button type="submit">Reserve</button>
     <button type="button" (click)="cancelReservation()" class="cancel-btn">Cancel</button>
   </form>
