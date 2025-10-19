@@ -3,11 +3,12 @@ using Application.Vehicle.Commands.ReserveVehicle;
 using Application.Vehicle.Queries.CheckVehicleAvailability;
 using Application.Vehicle.Queries.GetVehicles;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [ApiController]
+    [ApiController]    
     [Route("api/[controller]")]
     public class VehiclesController : ControllerBase
     {

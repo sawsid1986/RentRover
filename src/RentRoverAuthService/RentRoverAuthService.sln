@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentRoverAuthService", "AuthService\RentRoverAuthService.csproj", "{F7E8E44D-1DD1-476A-BF27-BBB66701A4D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7E8E44D-1DD1-476A-BF27-BBB66701A4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E8E44D-1DD1-476A-BF27-BBB66701A4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E8E44D-1DD1-476A-BF27-BBB66701A4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E8E44D-1DD1-476A-BF27-BBB66701A4D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D946EE7-760B-4C0F-A033-EE07122B660D}
+	EndGlobalSection
+EndGlobal
