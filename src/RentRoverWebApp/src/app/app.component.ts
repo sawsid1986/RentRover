@@ -5,9 +5,13 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, NavMenuComponent],
-  templateUrl: './app.html',
-  styleUrls: ['./app.css'],
+  standalone: true,
+  imports: [
+    RouterOutlet, 
+    CommonModule, 
+    NavMenuComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class App {
   title = 'default';

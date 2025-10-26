@@ -4,14 +4,18 @@
  */
 import { bootstrapApplication, provideProtractorTestingSupport } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { App } from './app/app';
+import { App } from './app/app.component';
 import { routes } from './app/app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { appReducer } from './app/app.reducer';
+import { AuthInterceptor } from './app/core/auth/auth.interceptor';
 
 bootstrapApplication(App, {
   providers: [
-    provideHttpClient(),
+    provideHttpClient( withInterceptors([AuthInterceptor])),
     provideProtractorTestingSupport(),
-    provideRouter(routes)
+    provideRouter(routes),
+    provideStore(appReducer)
   ]
 }).catch((err) => console.error(err));

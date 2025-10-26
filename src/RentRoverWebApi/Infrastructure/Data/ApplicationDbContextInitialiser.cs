@@ -50,7 +50,7 @@ namespace Infrastructure.Data
             // Seed, if necessary
             if (!_context.Vehicles.Any())
             {
-                _context.Vehicles.AddRangeAsync(
+                await _context.Vehicles.AddRangeAsync(
                     [
                         new Domain.Entities.Vehicle
                         {
@@ -66,6 +66,21 @@ namespace Infrastructure.Data
                             Model = "Corolla",
                             Year = 2020,
                             Price = 19000
+                        }]
+                );
+
+                await _context.SaveChangesAsync();
+            }
+
+            if (!_context.LoginUsers.Any())
+            {
+                await _context.LoginUsers.AddRangeAsync(
+                    [
+                        new Domain.Entities.LoginUser
+                        {
+                            UserName = "testadmin1",
+                            Email = "admin@rentrover.com",
+                            Password = "TestAdmin@123"
                         }]
                 );
 

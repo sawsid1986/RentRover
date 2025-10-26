@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [ApiController]    
+    [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class VehiclesController : ControllerBase
     {
