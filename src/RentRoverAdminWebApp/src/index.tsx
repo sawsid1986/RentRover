@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./common/store/store/Store";
 import { Provider } from "react-redux";
+import ErrorBoundary from "./Components/Shared/ErrorBoundary";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,7 +16,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <ErrorBoundary
+          fallback={<div>There was an error loading this section.</div>}
+        >
+          <App />
+        </ErrorBoundary>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

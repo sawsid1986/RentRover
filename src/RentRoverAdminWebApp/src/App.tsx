@@ -7,6 +7,7 @@ import Login from "./Components/Users/Login";
 import VehicleList from "./Components/Vehicles/VehicleList";
 import Header from "./Components/Shared/Header";
 import { AddVehicle } from "./Components/Vehicles/AddVehicle";
+import ViewVehicleDetails from "./Components/Vehicles/ViewVehicleDetails";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path={"/"} element={<Home />} />
           <Route path={"/login"} element={<Login />} />
           <Route path={"/vehicles"} element={<VehicleList />} />
+          <Route path={"/vehicles/:id"} element={<ViewVehicleDetails />} />
           <Route path={"/vehicles/new"} element={<AddVehicle />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

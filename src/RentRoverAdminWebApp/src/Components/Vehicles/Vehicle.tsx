@@ -1,8 +1,10 @@
-export type Vehicle = {
-  id: number;
-  make: string;
-  model: string;
-  year: number;
-  licensePlate?: string;
-  status?: string;
-};
+export class Vehicle {
+  constructor(
+    public id: number,
+    public name: string,
+    public brand: string,
+    public model: string,
+    public year: number,
+    public price: number
+  ) {}
+}

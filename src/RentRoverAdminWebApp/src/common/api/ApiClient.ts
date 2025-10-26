@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/models/RootState";
+import { store } from "../store/store/Store";
+import { clearAuth } from "../auth/AuthSlice";
 
 const ApiClient = axios.create({
   timeout: 5000, // Optional: Set a timeout for requests
@@ -11,7 +11,8 @@ const ApiClient = axios.create({
 
 ApiClient.interceptors.request.use(
   (config) => {
-    const token = useSelector((state: RootState) => state.auth.token);
+    const state = store.getState();
+    const token = state.auth.token;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -19,6 +20,19 @@ ApiClient.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+ApiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const UNAUTHORIZED = 401;
+    const { dispatch } = store; // direct access to redux store.
+    const { status } = error.response;
+    if (status === UNAUTHORIZED) {
+      dispatch(clearAuth());
+    }
     return Promise.reject(error);
   }
 );
