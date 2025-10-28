@@ -1,42 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Vehicle } from "./Vehicle";
 import { VehicleListItem } from "./VehicleListItem";
 import { Loading } from "../Shared/Loading";
-import ApiClient from "../../common/api/ApiClient";
+import useVehicleList from "./hooks/useVehicleList";
 
 const VehicleList: React.FC = () => {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { vehicles, loading, error, fetchVehicles } = useVehicleList();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchVehicles();
-  }, []);
-
-  const fetchVehicles = async () => {
-    let mounted = true;
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await ApiClient.get("/api/vehicles");
-      if (!mounted) return;
-      setVehicles(Array.isArray(response.data) ? response.data : []);
-    } catch {
-      if (mounted) {
-        setError("Unable to load vehicles from API — showing sample data.");
-        setVehicles([]);
-      }
-    } finally {
-      if (mounted) setLoading(false);
-    }
-
-    return () => {
-      mounted = false;
-    };
-  };
 
   return (
     <div style={{ marginTop: 24 }}>

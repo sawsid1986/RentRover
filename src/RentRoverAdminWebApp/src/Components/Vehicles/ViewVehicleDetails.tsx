@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ApiClient from "../../common/api/ApiClient";
-import { Vehicle } from "./Vehicle";
+import { Vehicle } from "./models/Vehicle";
 import { Loading } from "../Shared/Loading";
 import CurrencyFormatter from "../../common/helpers/CurrencyFormatter";
 

@@ -1,76 +1,38 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import ApiClient from "../../common/api/ApiClient";
 import { Loading } from "../Shared/Loading";
+import useAddVehicle from "./hooks/useAddVehicle";
+import CustomInput from "../Shared/CustomInput";
+import {
+  requiredValidator,
+  requiredValidatorForNumber,
+} from "../../common/utils/Validators";
 
-type VehicleForm = {
-  name: string;
-  brand: string;
-  model: string;
-  year: number;
-  price: number;
-};
-
-export const AddVehicle: React.FC = () => {
+export const AddVehicle = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState<VehicleForm>({
-    name: "",
-    brand: "",
-    model: "",
-    year: new Date().getFullYear(),
-    price: 0,
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const update = (k: keyof VehicleForm, v: string) => {
-    setForm((s) => ({ ...s, [k]: v }));
-  };
-
-  const validate = () => {
-    if (!form.brand.trim()) return "Make is required";
-    if (!form.model.trim()) return "Model is required";
-    const y = Number(form.year);
-    const now = new Date().getFullYear();
-    if (Number.isNaN(y) || y < 1900 || y > now + 1)
-      return `Enter a valid year between 1900 and ${now + 1}`;
-    return null;
-  };
+  const { form, loading, error, update, saveVehicle } = useAddVehicle();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    const v = validate();
-    if (v) {
-      setError(v);
+
+    const nameError = requiredValidator(form.name);
+    const brandError = requiredValidator(form.brand);
+    const modelError = requiredValidator(form.model);
+    const yearError = requiredValidatorForNumber(form.year);
+    const priceError = requiredValidatorForNumber(form.price);
+
+    if (nameError) {
+      if (inputRef.current != null) inputRef.current.focus();
+      return;
+    }
+    if (nameError || brandError || modelError || yearError || priceError) {
       return;
     }
 
-    setLoading(true);
-    try {
-      const payload = {
-        name: form.name.trim() || undefined,
-        brand: form.brand.trim(),
-        model: form.model.trim(),
-        year: Number(form.year),
-        price: Number(form.price),
-      } as const;
-
-      await ApiClient.post("/api/vehicles", payload);
-
-      // if (!res.ok) {
-      //   const text = await res
-      //     .text()
-      //     .catch(() => res.statusText || "Unknown error");
-      //   throw new Error(text || `HTTP ${res.status}`);
-      // }
-
-      // success — redirect to list
+    var res = await saveVehicle();
+    if (res) {
       navigate("/vehicles");
-    } catch (err: any) {
-      setError(err?.message ?? "Failed to add vehicle");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -82,68 +44,58 @@ export const AddVehicle: React.FC = () => {
 
       <form onSubmit={handleSubmit} noValidate>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
+          <CustomInput
             id="name"
-            className="form-control"
+            type="text"
+            ref={inputRef}
             value={form.name}
-            onChange={(e) => update("name", e.target.value)}
+            update={update}
+            label="Name"
+            validate={requiredValidator}
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="brand" className="form-label">
-            Brand
-          </label>
-          <input
+          <CustomInput
             id="brand"
-            className="form-control"
+            type="text"
             value={form.brand}
-            onChange={(e) => update("brand", e.target.value)}
-            required
+            update={update}
+            label="Brand"
+            validate={requiredValidator}
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="model" className="form-label">
-            Model
-          </label>
-          <input
+          <CustomInput
             id="model"
-            className="form-control"
+            type="text"
             value={form.model}
-            onChange={(e) => update("model", e.target.value)}
-            required
+            update={update}
+            label="Model"
+            validate={requiredValidator}
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="year" className="form-label">
-            Year
-          </label>
-          <input
+          <CustomInput
             id="year"
             type="number"
-            className="form-control"
             value={form.year}
-            onChange={(e) => update("year", e.target.value)}
-            required
+            update={update}
+            label="Year"
+            validate={requiredValidator}
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="price" className="form-label">
-            Price
-          </label>
-          <input
+          <CustomInput
             id="price"
             type="number"
-            className="form-control"
             value={form.price}
-            onChange={(e) => update("price", e.target.value)}
-            required
+            update={update}
+            label="Price"
+            validate={requiredValidator}
           />
         </div>
 
